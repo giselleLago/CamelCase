@@ -7,7 +7,7 @@ namespace CamelCase
         static void Main(string[] args)
         {
             var result = new Converter();
-            Console.WriteLine(result.CamelCase("a b c d-e-f%g"));
+            Console.WriteLine(result.CamelCase("This*is%a-TEST    "));
             Console.ReadLine();
         }
     }
