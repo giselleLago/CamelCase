@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace CamelCase
@@ -8,27 +10,25 @@ namespace CamelCase
     {
         public string CamelCase(string str)
         {
-            var res = new List<char>();
-            var isLetter = true;
+
+            var res = "";
+            var nextIsUpper = false;
             for (int i = 0; i < str.Length; i++)
             {
-                if (char.IsLetter(str[i]) && isLetter == false)
-                {
-                    res.Add(char.ToUpper(str[i]));
-                    isLetter = true;
-                    
-                }
-                else if (char.IsLetter(str[i]) && isLetter != false)
-                {
-                    res.Add(char.ToLower(str[i]));
-                }
+                var current = str[i];
+                if (char.IsLetter(current))
+                { 
+                    res += nextIsUpper 
+                        ? current.ToString().ToUpperInvariant()
+                        : current.ToString().ToLowerInvariant();
+                    nextIsUpper = false;
+                } 
                 else
                 {
-                    isLetter = false;
+                    nextIsUpper = true;
                 }
-                
             } 
-            return string.Join("", res);
+            return res;
 
         }
     }
